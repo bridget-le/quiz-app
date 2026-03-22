@@ -13,15 +13,16 @@ def parse_docx(file):
     q = {}
 
     for line in lines:
-        if line.startswith("Câu hỏi"):
+        # 👉 nhận diện câu hỏi dạng "1. bla bla"
+        if line[0].isdigit():
             if q:
                 questions.append(q)
-            q = {"question": line.replace("Câu hỏi:", "").strip(), "options": [], "answer": ""}
-        
+            q = {"question": line.split('.', 1)[1].strip(), "options": [], "answer": ""}
+
         elif line.startswith(("A.", "B.", "C.", "D.")):
             q["options"].append(line[3:].strip())
-        
-        elif line.startswith("Đáp án"):
+
+        elif "Đáp án" in line:
             ans = line.split(":")[1].strip()
             index = ord(ans) - ord('A')
             if index < len(q["options"]):
