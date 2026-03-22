@@ -1,0 +1,12 @@
+[
+  {
+    "question": "1 + 1 = ?",
+    "options": ["1", "2", "3"],
+    "answer": "2"
+  },
+  {
+    "question": "Python là gì?",
+    "options": ["Rắn", "Ngôn ngữ lập trình", "Game"],
+    "answer": "Ngôn ngữ lập trình"
+  }
+]

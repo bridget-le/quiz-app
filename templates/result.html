@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kết quả</title>
+</head>
+<body style="font-family: Arial; max-width: 600px; margin: auto;">
+
+<h1 style="text-align:center;">🎯 Kết quả</h1>
+<h2 style="text-align:center;">{{ score }}/{{ total }}</h2>
+
+{% for r in results %}
+    <div style="background:#f5f5f5; padding:15px; margin-bottom:15px; border-radius:10px;">
+
+        <p><b>{{ r.question }}</b></p>
+
+        {% for option in r.options %}
+            {% if option == r.correct %}
+                <div style="color:green;">✔ {{ option }}</div>
+
+            {% elif option == r.user %}
+                <div style="color:red;">✖ {{ option }}</div>
+
+            {% else %}
+                <div>{{ option }}</div>
+            {% endif %}
+        {% endfor %}
+
+    </div>
+{% endfor %}
+
+<div style="text-align:center;">
+    <a href="/">
+        <button style="padding:10px 20px;">Làm lại</button>
+    </a>
+</div>
+
+</body>
+</html>
