@@ -13,8 +13,7 @@ def parse_docx(file):
     q = {}
 
     for line in lines:
-        # 👉 nhận diện câu hỏi dạng "1. bla bla"
-        if line[0].isdigit():
+        if line and line[0].isdigit():
             if q:
                 questions.append(q)
             q = {"question": line.split('.', 1)[1].strip(), "options": [], "answer": ""}
@@ -23,7 +22,12 @@ def parse_docx(file):
             q["options"].append(line[3:].strip())
 
         elif "Đáp án" in line:
-            ans = line.split(":")[1].strip()
+            parts = line.split(":")
+            if len(parts) > 1:
+                ans = parts[1].strip()
+            else:
+                ans = line[-1]
+
             index = ord(ans) - ord('A')
             if index < len(q["options"]):
                 q["answer"] = q["options"][index]
